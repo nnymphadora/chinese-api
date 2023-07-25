@@ -46,18 +46,21 @@ const updateLevel = async (id: number, level: any) => {
         level.isActive,
       ]
     );
+    return { success: true, result };
   } catch (e: any) {
     return { success: false, msg: e.message };
   }
 };
 
 //soft delete
+//not in use currently
 const makeLevelInactive = async (id: number) => {
   try {
     const result = await dbConnection.query(
       "UPDATE level SET is_active = ? WHERE id = ?",
       [0, id]
     );
+    return { success: true, result };
   } catch (e: any) {
     return { succes: false, msg: e.message };
   }
@@ -69,6 +72,7 @@ const makeLevelActive = async (id: number) => {
       "UPDATE level SET is_active = ? WHERE id = ?",
       [1, id]
     );
+    return { success: true, result };
   } catch (e: any) {
     return { succes: false, msg: e.message };
   }

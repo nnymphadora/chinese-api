@@ -1,4 +1,3 @@
-import { Any } from "typeorm";
 import levelRepo from "../repositories/level-repo";
 
 const getAllLevels = async () => {
