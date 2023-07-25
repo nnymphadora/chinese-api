@@ -8,6 +8,7 @@ import dbConnection from "./common/db-Connection";
 import userRouter from "./routing/user-routing";
 import levelRouter from "./routing/level-routing";
 import lessonRouter from "./routing/lesson-routing";
+import lessonStatusValueRouter from "./routing/lesson-status-value-routing";
 
 const app = express();
 app.use(express.json());
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use(userRouter);
 app.use("/levels", levelRouter);
 app.use("/lessons", lessonRouter);
+app.use("/ls-values", lessonStatusValueRouter);
 
 app.use(cors());
 
