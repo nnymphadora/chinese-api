@@ -12,6 +12,18 @@ const getLessonsByLevel = async (levelId: number) => {
   }
 };
 
+const getLessonById = async (id: number) => {
+  try {
+    const result = await dbConnection.query(
+      "SELECT * FROM lesson WHERE id = ?",
+      [id]
+    );
+    return result;
+  } catch (e: any) {
+    return { succes: false, msg: e.message };
+  }
+};
+
 const insertLesson = async (lesson: any) => {
   try {
     const result = await dbConnection.query(
@@ -51,4 +63,4 @@ const updateLesson = async (id: number, lesson: any) => {
   }
 };
 
-export default { getLessonsByLevel, insertLesson, updateLesson };
+export default { getLessonsByLevel, insertLesson, updateLesson, getLessonById };

@@ -10,14 +10,13 @@ import levelRouter from "./routing/level-routing";
 import lessonRouter from "./routing/lesson-routing";
 
 const app = express();
+app.use(express.json());
 
 app.use(userRouter);
 app.use("/levels", levelRouter);
 app.use("/lessons", lessonRouter);
 
 app.use(cors());
-
-app.use(express.json());
 
 app.listen(3000, () => {
   //izvrsava se kad se server pokrene

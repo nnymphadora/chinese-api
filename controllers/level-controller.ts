@@ -13,6 +13,7 @@ const getLevelByID = async (req: Request, res: Response) => {
 };
 
 const insertLevel = async (req: Request, res: Response) => {
+  console.log(req.body);
   const data = await levelService.insertLevel(req.body);
   res.send(data);
 };

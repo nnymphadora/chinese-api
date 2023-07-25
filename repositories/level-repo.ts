@@ -23,8 +23,9 @@ const getLevelByID = async (id: number) => {
 const insertLevel = async (level: any) => {
   try {
     const result = await dbConnection.query(
-      `INSERT INTO hotel (name, difficulty, description, cefr_equiv) VALUES 
-                                                (?,?,?,?)`,
+      `INSERT INTO level(
+                    name, difficulty, description, cefr_equiv) VALUES 
+                    (?, ?, ?, ?)`,
       [level.name, level.difficulty, level.description, level.cefrEquiv]
     );
     return { success: true, result };

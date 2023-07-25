@@ -6,8 +6,10 @@ const lessonRouter = express.Router();
 lessonRouter.route("/").post(lessonController.insertLesson);
 
 lessonRouter
-  .route("/by-level/:id")
-  .get(lessonController.getLessonsByLevel)
-  .put(lessonController.updateLesson);
+  .route("/:id")
+  .put(lessonController.updateLesson)
+  .get(lessonController.getLessonByID);
+
+lessonRouter.route("/by-level/:id").get(lessonController.getLessonsByLevel);
 
 export default lessonRouter;

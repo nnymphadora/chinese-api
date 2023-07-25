@@ -7,6 +7,12 @@ const getLessonsByLevel = async (req: Request, res: Response) => {
   res.send(data);
 };
 
+const getLessonByID = async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const data = await lessonService.getLessonByID(parseInt(id));
+  res.send(data);
+};
+
 const insertLesson = async (req: Request, res: Response) => {
   const data = await lessonService.insertLesson(req.body);
   res.send(data);
@@ -24,4 +30,5 @@ export default {
   getLessonsByLevel,
   insertLesson,
   updateLesson,
+  getLessonByID,
 };

@@ -12,10 +12,25 @@ const getLessonsByLevel = async (levelId: number) => {
       description: lesson.description,
       levelId: lesson.level_id,
       lessonOrderInLevel: lesson.lesson_order_in_level,
-      is_active: lesson.is_active,
+      isActive: lesson.is_active,
     });
   });
   return result;
+};
+
+const getLessonByID = async (id: number) => {
+  const data = await lessonRepo.getLessonById(id);
+
+  if (data && data.length > 0) {
+    return {
+      id: data[0].id,
+      name: data[0].name,
+      description: data[0].description,
+      levelId: data[0].level_id,
+      lessonOrderInLevel: data[0].lesson_order_in_level,
+      isActive: data[0].is_active,
+    };
+  }
 };
 
 const insertLesson = async (lesson: any) => {
@@ -32,4 +47,5 @@ export default {
   getLessonsByLevel,
   insertLesson,
   updateLesson,
+  getLessonByID,
 };
