@@ -7,7 +7,7 @@ const dbConnection = new DataSource({
   port: 3006,
   username: "root",
   password: "hellohi24",
-  database: "chinese-practice",
+  database: "chinese_practice",
 });
 
 export default dbConnection;
