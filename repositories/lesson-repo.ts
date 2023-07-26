@@ -2,11 +2,11 @@ import dbConnection from "../common/db-Connection";
 
 const getLessonsByLevel = async (levelId: number) => {
   try {
-    const result = await dbConnection.query(
+    const data = await dbConnection.query(
       "SELECT * FROM lesson WHERE level_id = ?",
       [levelId]
     );
-    return result;
+    return data;
   } catch (e: any) {
     return { success: false, msg: e.message };
   }
@@ -14,11 +14,10 @@ const getLessonsByLevel = async (levelId: number) => {
 
 const getLessonById = async (id: number) => {
   try {
-    const result = await dbConnection.query(
-      "SELECT * FROM lesson WHERE id = ?",
-      [id]
-    );
-    return result;
+    const data = await dbConnection.query("SELECT * FROM lesson WHERE id = ?", [
+      id,
+    ]);
+    return data;
   } catch (e: any) {
     return { succes: false, msg: e.message };
   }
