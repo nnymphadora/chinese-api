@@ -9,6 +9,9 @@ import levelRouter from "./routing/level-routing";
 import lessonRouter from "./routing/lesson-routing";
 import lessonStatusValueRouter from "./routing/lesson-status-value-routing";
 import avatarRouter from "./routing/avatar-routing";
+import levelCefrEquivRouter from "./routing/level-cefr-equiv-routing";
+import levelDifficultyRouter from "./routing/level-difficulty-routing";
+import newWordRouter from "./routing/new-word-routing";
 
 const app = express();
 app.use(express.json());
@@ -18,7 +21,10 @@ app.use(userRouter);
 app.use("/levels", levelRouter);
 app.use("/lessons", lessonRouter);
 app.use("/ls-values", lessonStatusValueRouter);
-app.use("avatars", avatarRouter);
+app.use("/avatars", avatarRouter);
+app.use("/level-cefr-equivs", levelCefrEquivRouter);
+app.use("/level-difficulty", levelDifficultyRouter);
+app.use("/new-words", newWordRouter);
 
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));

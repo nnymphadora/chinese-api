@@ -1,6 +1,4 @@
-import e from "express";
 import dbConnection from "../common/db-Connection";
-import { ReturningStatementNotSupportedError } from "typeorm";
 
 const getAllAvatars = async () => {
   try {
