@@ -9,9 +9,9 @@ const getAllLevels = async () => {
     result.push({
       id: level.id,
       name: level.name,
-      difficulty: level.difficulty,
+      difficulty: level.difficulty_name,
       description: level.description,
-      cefrEquiv: level.cefr_equiv,
+      cefrEquiv: level.cefr_equiv_name,
       isActive: level.is_active,
     });
   });
@@ -25,9 +25,9 @@ const getLevelByID = async (id: number) => {
     return {
       id: data[0].id,
       name: data[0].name,
-      difficulty: data[0].difficulty,
+      difficulty: data[0].difficulty_name,
       description: data[0].description,
-      cefrEquiv: data[0].cefr_equiv,
+      cefrEquiv: data[0].cefr_equiv_name,
       isActive: data[0].is_active,
     };
   }

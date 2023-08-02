@@ -2,7 +2,9 @@ import dbConnection from "../common/db-Connection";
 
 const getAllLevels = async () => {
   try {
-    const data = await dbConnection.query("SELECT * FROM level");
+    const data = await dbConnection.query(
+      "SELECT level.*, level_difficulty.name AS difficulty_name, level_cefr_equiv.name AS cefr_equiv_name FROM level INNER JOIN level_difficulty ON level.difficulty = level_difficulty.id INNER JOIN level_cefr_equiv ON level.cefr_equiv = level_cefr_equiv.id"
+    );
     return data;
   } catch (e) {
     return [];
@@ -11,9 +13,10 @@ const getAllLevels = async () => {
 
 const getLevelByID = async (id: number) => {
   try {
-    const data = await dbConnection.query(`SELECT * FROM level WHERE id = ?`, [
-      id,
-    ]);
+    const data = await dbConnection.query(
+      "SELECT level.*, level_difficulty.name AS difficulty_name, level_cefr_equiv.name AS cefr_equiv_name FROM level INNER JOIN level_difficulty ON level.difficulty = level_difficulty.id INNER JOIN level_cefr_equiv ON level.cefr_equiv = level_cefr_equiv.id WHERE level.id = ?",
+      [id]
+    );
     return data;
   } catch (e) {
     return null;

@@ -12,8 +12,10 @@ import avatarRouter from "./routing/avatar-routing";
 import levelCefrEquivRouter from "./routing/level-cefr-equiv-routing";
 import levelDifficultyRouter from "./routing/level-difficulty-routing";
 import newWordRouter from "./routing/new-word-routing";
+import exampleSentenceRouter from "./routing/example-sentence-routing";
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 //routers
@@ -25,8 +27,8 @@ app.use("/avatars", avatarRouter);
 app.use("/level-cefr-equivs", levelCefrEquivRouter);
 app.use("/level-difficulty", levelDifficultyRouter);
 app.use("/new-words", newWordRouter);
+app.use("/example-sentences", exampleSentenceRouter);
 
-app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.listen(3000, () => {

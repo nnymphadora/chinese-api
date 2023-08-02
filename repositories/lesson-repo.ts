@@ -3,7 +3,7 @@ import dbConnection from "../common/db-Connection";
 const getLessonsByLevel = async (levelId: number) => {
   try {
     const data = await dbConnection.query(
-      "SELECT * FROM lesson WHERE level_id = ?",
+      "SELECT lesson.*, level.name AS level FROM lesson INNER JOIN level ON lesson.level_id = level.id WHERE lesson.level_id = ?",
       [levelId]
     );
     return data;
@@ -14,9 +14,10 @@ const getLessonsByLevel = async (levelId: number) => {
 
 const getLessonById = async (id: number) => {
   try {
-    const data = await dbConnection.query("SELECT * FROM lesson WHERE id = ?", [
-      id,
-    ]);
+    const data = await dbConnection.query(
+      "SELECT lesson.*, level.name AS level FROM lesson INNER JOIN level ON lesson.level_id = level.id WHERE id = ?",
+      [id]
+    );
     return data;
   } catch (e: any) {
     return { succes: false, msg: e.message };
