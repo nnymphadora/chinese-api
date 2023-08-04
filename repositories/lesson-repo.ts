@@ -14,10 +14,9 @@ const getLessonsByLevel = async (levelId: number) => {
 
 const getLessonById = async (id: number) => {
   try {
-    const data = await dbConnection.query(
-      "SELECT lesson.*, level.name AS level FROM lesson INNER JOIN level ON lesson.level_id = level.id WHERE id = ?",
-      [id]
-    );
+    const data = await dbConnection.query("SELECT * FROM lesson WHERE id = ?", [
+      id,
+    ]);
     return data;
   } catch (e: any) {
     return { succes: false, msg: e.message };

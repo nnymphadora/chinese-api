@@ -14,6 +14,7 @@ newWordRouter
 newWordRouter
   .route("/by-lesson/:id")
   .get(newWordController.getNewWordsByLesson);
+
 newWordRouter.route("/by-level/:id").get(newWordController.getNewWordsByLevel);
 
 export default newWordRouter;

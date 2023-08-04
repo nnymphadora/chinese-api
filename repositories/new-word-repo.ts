@@ -3,7 +3,7 @@ import dbConnection from "../common/db-Connection";
 const getNewWordsByLesson = async (lessonId: number) => {
   try {
     const data = await dbConnection.query(
-      "SELECT * FROM new_word WHERE related_lesson_id = ?",
+      "SELECT new_word.* FROM new_word INNER JOIN lesson ON new_word.related_lesson_id = lesson.id WHERE lesson.id = ?",
       [lessonId]
     );
     return data;
