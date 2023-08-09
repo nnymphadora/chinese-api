@@ -1,3 +1,4 @@
+import { Any } from "typeorm";
 import levelRepo from "../repositories/level-repo";
 
 const getAllLevels = async () => {
@@ -13,6 +14,7 @@ const getAllLevels = async () => {
       description: level.description,
       cefrEquiv: level.cefr_equiv_name,
       isActive: level.is_active,
+      isRemoved: level.is_removed,
     });
   });
   return result;
@@ -29,6 +31,7 @@ const getLevelByID = async (id: number) => {
       description: data[0].description,
       cefrEquiv: data[0].cefr_equiv_name,
       isActive: data[0].is_active,
+      isRemoved: data[0].is_removed,
     };
   }
 };
@@ -39,13 +42,27 @@ const insertLevel = async (level: any) => {
 };
 
 const updateLevel = async (id: number, level: any) => {
+  console.log(level);
   const result = await levelRepo.updateLevel(id, level);
   return result;
 };
 
+const toggleActiveLevel = async (id: number, toggleActive: any) => {
+  const result = await levelRepo.toggleActiveLevel(id, toggleActive);
+  console.log(id, toggleActive);
+
+  return result;
+};
+
+const softDeleteLevel = async (id: number, level: any) => {
+  const result = await levelRepo.softDeleteLevel(id, level);
+  return result;
+};
 export default {
   getAllLevels,
   getLevelByID,
   updateLevel,
   insertLevel,
+  toggleActiveLevel,
+  softDeleteLevel,
 };

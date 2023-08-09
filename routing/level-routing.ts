@@ -13,4 +13,8 @@ levelRouter
   .get(levelController.getLevelByID)
   .put(levelController.updateLevel);
 
+levelRouter.route("/:id/delete").put(levelController.softDeleteLevel);
+
+levelRouter.route("/:id/toggle-active").put(levelController.toggleActiveLevel);
+
 export default levelRouter;

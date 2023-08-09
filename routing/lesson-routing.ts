@@ -12,4 +12,10 @@ lessonRouter
 
 lessonRouter.route("/by-level/:id").get(lessonController.getLessonsByLevel);
 
+lessonRouter.route("/:id/delete").put(lessonController.softDeleteLesson);
+
+lessonRouter
+  .route("/:id/toggle-active")
+  .put(lessonController.toggleActiveLesson);
+
 export default lessonRouter;

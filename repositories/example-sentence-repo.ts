@@ -62,15 +62,12 @@ const updateExampleSentence = async (id: number, exSent: any) => {
 
 const deleteExampleSentence = async (id: number) => {
   try {
-    const result1 = await dbConnection.query(
-      "DELETE FROM sentence_is_example_for_word WHERE example_sentence_id = ?",
+    const result = await dbConnection.query(
+      "DELETE CASCADE FROM example_sentence WHERE id = ?",
       [id]
     );
-    const result2 = await dbConnection.query(
-      "DELETE FROM example_sentence WHERE id = ?",
-      [id]
-    );
-    return { success: true, result1, result2 };
+
+    return { success: true, result };
   } catch (e: any) {
     return { success: false, msg: e.message };
   }

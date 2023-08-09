@@ -41,14 +41,8 @@ const insertLevel = async (level: any) => {
 const updateLevel = async (id: number, level: any) => {
   try {
     const result = await dbConnection.query(
-      "UPDATE level SET name  = ?, difficulty = ?, description = ?, cefr_equiv = ?, is_active = ? WHERE id = ?",
-      [
-        level.name,
-        level.difficulty,
-        level.description,
-        level.cefrEquiv,
-        level.isActive,
-      ]
+      "UPDATE level SET name  = ?, difficulty = ?, description = ?, cefr_equiv = ?  WHERE id = ?",
+      [level.name, level.difficulty, level.description, level.cefrEquiv, id]
     );
     return { success: true, result };
   } catch (e: any) {
@@ -56,13 +50,12 @@ const updateLevel = async (id: number, level: any) => {
   }
 };
 
-//soft delete
-//not in use currently
-const makeLevelInactive = async (id: number) => {
+//admin can do this, makes the level visible or not visible to the regular user, and still visible to the admin
+const toggleActiveLevel = async (id: number, toggleActive: any) => {
   try {
     const result = await dbConnection.query(
       "UPDATE level SET is_active = ? WHERE id = ?",
-      [0, id]
+      [toggleActive.is_active, id]
     );
     return { success: true, result };
   } catch (e: any) {
@@ -70,10 +63,10 @@ const makeLevelInactive = async (id: number) => {
   }
 };
 
-const makeLevelActive = async (id: number) => {
+const softDeleteLevel = async (id: number, level: any) => {
   try {
     const result = await dbConnection.query(
-      "UPDATE level SET is_active = ? WHERE id = ?",
+      "UPDATE level SET is_removed = ? WHERE id = ?",
       [1, id]
     );
     return { success: true, result };
@@ -87,4 +80,6 @@ export default {
   getLevelByID,
   insertLevel,
   updateLevel,
+  toggleActiveLevel,
+  softDeleteLevel,
 };
