@@ -13,6 +13,10 @@ const getNewWordsByLesson = async (lessonId: number) => {
       pinyin: newWord.pinyin,
       audioPath: newWord.audio_path,
       relatedLessonId: newWord.related_lesson_id,
+      exSent1: newWord.ex_sent_1,
+      exSent1Mne: newWord.ex_sent_1_mne,
+      exSent2: newWord.ex_sent_2,
+      exSent2Mne: newWord.ex_sent_2_mne,
     });
   });
   return result;
@@ -32,6 +36,10 @@ const getNewWordsByLevel = async (levelId: number) => {
       pinyin: newWord.pinyin,
       audioPath: newWord.audio_path,
       relatedLessonId: newWord.related_lesson_id,
+      exSent1: newWord.ex_sent_1,
+      exSent1Mne: newWord.ex_sent_1_mne,
+      exSent2: newWord.ex_sent_2,
+      exSent2Mne: newWord.ex_sent_2_mne,
     });
   });
   return result;
@@ -48,6 +56,10 @@ const getNewWordById = async (id: number) => {
       pinyin: data[0].pinyin,
       audioPath: data[0].audio_path,
       relatedLessonId: data[0].related_lesson_id,
+      exSent1: data[0].ex_sent_1,
+      exSent1Mne: data[0].ex_sent_1_mne,
+      exSent2: data[0].ex_sent_2,
+      exSent2Mne: data[0].ex_sent_2_mne,
     };
   }
 };

@@ -38,13 +38,17 @@ const getNewWordById = async (id: number) => {
 const insertNewWord = async (newWord: any) => {
   try {
     const result = await dbConnection.query(
-      "INSERT INTO new_word(content,meaning,pinyin,audio_path,related_lesson_id) VALUES (?,?,?,?,?)",
+      "INSERT INTO new_word(content,meaning,pinyin,audio_path,related_lesson_id, ex_sent_1, ex_sent_1_mne, ex_sent_2, ex_sent_2_mne) VALUES (?,?,?,?,?,?,?,?,?)",
       [
         newWord.content,
         newWord.meaning,
         newWord.pinyin,
         newWord.audioPath,
         newWord.relatedLessonId,
+        newWord.exSent1,
+        newWord.exSent1Mne,
+        newWord.exSent2,
+        newWord.exSent2Mne,
       ]
     );
     return { success: true, result };
@@ -56,12 +60,17 @@ const insertNewWord = async (newWord: any) => {
 const updateNewWord = async (id: number, newWord: any) => {
   try {
     const result = await dbConnection.query(
-      "UPDATE new_word SET content = ?, meaning = ?, pinyin = ?, audio_path = ?, related_lesson_id = ? WHERE id = ?",
+      "UPDATE new_word SET content = ?, meaning = ?, pinyin = ?, audio_path = ?, related_lesson_id = ?, ex_sent_1 = ?, ex_sent_1_mne = ?, ex_sent_2 = ? , ex_sent_2_mne = ? WHERE id = ?",
       [
         newWord.meaning,
         newWord.pinyin,
         newWord.audioPath,
         newWord.relatedLessonId,
+        newWord.exSent1,
+        newWord.exSent1Mne,
+        newWord.exSent2,
+        newWord.exSent2Mne,
+
         id,
       ]
     );
@@ -77,7 +86,7 @@ const updateNewWord = async (id: number, newWord: any) => {
 const deleteNewWord = async (id: number) => {
   try {
     const result = await dbConnection.query(
-      "DELETE CASCADE FROM new_word  WHERE id = ?",
+      "DELETE FROM new_word  WHERE id = ?",
       [id]
     );
     return { succes: true, result };
