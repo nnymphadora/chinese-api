@@ -38,12 +38,12 @@ const getNewWordById = async (id: number) => {
 const insertNewWord = async (newWord: any) => {
   try {
     const result = await dbConnection.query(
-      "INSERT INTO new_word(content,meaning,pinyin,audio_path,related_lesson_id, ex_sent_1, ex_sent_1_mne, ex_sent_2, ex_sent_2_mne) VALUES (?,?,?,?,?,?,?,?,?)",
+      "INSERT INTO new_word(content,meaning,pinyin,related_lesson_id, ex_sent_1, ex_sent_1_mne, ex_sent_2, ex_sent_2_mne) VALUES (?,?,?,?,?,?,?,?,)",
       [
         newWord.content,
         newWord.meaning,
         newWord.pinyin,
-        newWord.audioPath,
+
         newWord.relatedLessonId,
         newWord.exSent1,
         newWord.exSent1Mne,
@@ -60,11 +60,10 @@ const insertNewWord = async (newWord: any) => {
 const updateNewWord = async (id: number, newWord: any) => {
   try {
     const result = await dbConnection.query(
-      "UPDATE new_word SET content = ?, meaning = ?, pinyin = ?, audio_path = ?, related_lesson_id = ?, ex_sent_1 = ?, ex_sent_1_mne = ?, ex_sent_2 = ? , ex_sent_2_mne = ? WHERE id = ?",
+      "UPDATE new_word SET content = ?, meaning = ?, pinyin = ?, related_lesson_id = ?, ex_sent_1 = ?, ex_sent_1_mne = ?, ex_sent_2 = ? , ex_sent_2_mne = ? WHERE id = ?",
       [
         newWord.meaning,
         newWord.pinyin,
-        newWord.audioPath,
         newWord.relatedLessonId,
         newWord.exSent1,
         newWord.exSent1Mne,
