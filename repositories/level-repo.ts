@@ -6,8 +6,8 @@ const getAllLevels = async () => {
       "SELECT level.*, level_difficulty.name AS difficulty_name, level_cefr_equiv.name AS cefr_equiv_name FROM level INNER JOIN level_difficulty ON level.difficulty = level_difficulty.id INNER JOIN level_cefr_equiv ON level.cefr_equiv = level_cefr_equiv.id"
     );
     return data;
-  } catch (e) {
-    return [];
+  } catch (e: any) {
+    return { success: false, msg: e.message };
   }
 };
 
@@ -18,8 +18,8 @@ const getLevelByID = async (id: number) => {
       [id]
     );
     return data;
-  } catch (e) {
-    return null;
+  } catch (e: any) {
+    return { success: false, msg: e.message };
   }
 };
 

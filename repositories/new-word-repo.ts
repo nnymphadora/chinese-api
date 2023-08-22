@@ -26,9 +26,10 @@ const getNewWordsByLevel = async (levelId: number) => {
 
 const getNewWordById = async (id: number) => {
   try {
-    const data = await dbConnection.query("SELECT * FROM new_word WHERE = ?", [
-      id,
-    ]);
+    const data = await dbConnection.query(
+      "SELECT * FROM new_word WHERE id = ?",
+      [id]
+    );
     return data;
   } catch (e: any) {
     return { succes: false, msg: e.message };
@@ -38,12 +39,11 @@ const getNewWordById = async (id: number) => {
 const insertNewWord = async (newWord: any) => {
   try {
     const result = await dbConnection.query(
-      "INSERT INTO new_word(content,meaning,pinyin,related_lesson_id, ex_sent_1, ex_sent_1_mne, ex_sent_2, ex_sent_2_mne) VALUES (?,?,?,?,?,?,?,?,)",
+      "INSERT INTO new_word(content,meaning,pinyin,related_lesson_id, ex_sent_1, ex_sent_1_mne, ex_sent_2, ex_sent_2_mne) VALUES (?,?,?,?,?,?,?,?)",
       [
         newWord.content,
         newWord.meaning,
         newWord.pinyin,
-
         newWord.relatedLessonId,
         newWord.exSent1,
         newWord.exSent1Mne,

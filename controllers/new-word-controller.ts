@@ -19,8 +19,10 @@ const getNewWordById = async (req: Request, res: Response) => {
   res.send(data);
 };
 
-const insertNewWord = async (req: Request, res: Response) => {
-  const data = await newWordService.insertNewWord(req.body);
+const insertNewWords = async (req: Request, res: Response) => {
+  console.log(req.body);
+
+  const data = await newWordService.insertNewWords(req.body);
   res.send(data);
 };
 
@@ -40,7 +42,7 @@ export default {
   getNewWordById,
   getNewWordsByLesson,
   updateNewWord,
-  insertNewWord,
+  insertNewWords,
   deleteNewWord,
   getNewWordsByLevel,
 };

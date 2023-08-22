@@ -61,9 +61,13 @@ const getNewWordById = async (id: number) => {
   }
 };
 
-const insertNewWord = async (newWord: any) => {
-  const result = await newWordRepo.insertNewWord(newWord);
-  return result;
+const insertNewWords = async (newWords: any[]) => {
+  const promises = newWords.map(async (newWord) => {
+    return newWordRepo.insertNewWord(newWord);
+  });
+
+  const results = await Promise.all(promises);
+  return results;
 };
 
 const updateNewWord = async (id: number, lesson: any) => {
@@ -80,7 +84,7 @@ export default {
   getNewWordsByLesson,
   getNewWordsByLevel,
   getNewWordById,
-  insertNewWord,
+  insertNewWords,
   updateNewWord,
   deleteNewWord,
 };

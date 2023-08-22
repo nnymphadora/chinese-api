@@ -3,7 +3,7 @@ import newWordController from "../controllers/new-word-controller";
 
 const newWordRouter = express.Router();
 
-newWordRouter.route("/").post(newWordController.insertNewWord);
+newWordRouter.route("/").post(newWordController.insertNewWords);
 
 newWordRouter
   .route("/:id")
