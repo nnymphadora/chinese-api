@@ -2,13 +2,13 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import dbConnection from "./common/db-Connection";
+require("dotenv").config();
 
-//import ruta
+//import rutera
 import userRouter from "./routing/user-routing";
 import levelRouter from "./routing/level-routing";
 import lessonRouter from "./routing/lesson-routing";
 import lessonStatusValueRouter from "./routing/lesson-status-value-routing";
-import avatarRouter from "./routing/avatar-routing";
 import levelCefrEquivRouter from "./routing/level-cefr-equiv-routing";
 import levelDifficultyRouter from "./routing/level-difficulty-routing";
 import newWordRouter from "./routing/new-word-routing";
@@ -23,7 +23,6 @@ app.use(userRouter);
 app.use("/levels", levelRouter);
 app.use("/lessons", lessonRouter);
 app.use("/ls-values", lessonStatusValueRouter);
-app.use("/avatars", avatarRouter);
 app.use("/level-cefr-equivs", levelCefrEquivRouter);
 app.use("/level-difficulty", levelDifficultyRouter);
 app.use("/new-words", newWordRouter);
@@ -44,3 +43,13 @@ dbConnection
   .catch((err: any) => {
     console.log(err);
   });
+
+//generate secret key
+// import crypto from "crypto";
+
+// const generateSecretKey = () => {
+//   return crypto.randomBytes(64).toString("hex");
+// };
+
+// const secretKey = generateSecretKey();
+// console.log(secretKey);
