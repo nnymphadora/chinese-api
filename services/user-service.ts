@@ -4,13 +4,19 @@ import jwt from "jsonwebtoken";
 
 const secretKey = process.env.JWT_SECRET as string;
 
+const getAllUsernames = async () => {
+  const data = await userRepository.getAllUsernames();
+  const result: any = [];
+  data.forEach((el: any) => result.push(el.username));
+  return result;
+};
+
 const register = async (user: any) => {
   user.hashedPassword = crypto
     .createHash("sha256")
     .update(user.password)
     .digest("hex");
   const result = await userRepository.register(user);
-  console.log(secretKey);
 
   if (result.affectedRows > 0) {
     const token = jwt.sign(
@@ -50,4 +56,4 @@ const login = async (user: any) => {
   }
 };
 
-export default { register, login };
+export default { register, login, getAllUsernames };

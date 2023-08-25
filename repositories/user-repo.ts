@@ -1,5 +1,14 @@
 import dbConnection from "../common/db-Connection";
 
+const getAllUsernames = async () => {
+  try {
+    const result = await dbConnection.query("SELECT username FROM user");
+    return result;
+  } catch (e: any) {
+    return { success: false, msg: e.message };
+  }
+};
+
 const register = async (user: any) => {
   try {
     const result = await dbConnection.query(
@@ -25,4 +34,4 @@ const login = async (user: any) => {
   }
 };
 
-export default { register, login };
+export default { register, login, getAllUsernames };
