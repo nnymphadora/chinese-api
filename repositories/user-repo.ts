@@ -11,13 +11,17 @@ const getAllUsernames = async () => {
 
 const register = async (user: any) => {
   try {
+    console.log(user);
+
     const result = await dbConnection.query(
       `INSERT INTO user(username, email, hashed_password, avatar_path, is_admin) 
                                                 VALUES (?, ?, ?, ?, 0)`,
-      [user.username, user.email, user.hashedPassword, user.avatar_path]
+      [user.username, user.email, user.hashedPassword, user.avatarPath]
     );
     return result;
   } catch (e: any) {
+    console.log(e);
+
     return { success: false, msg: e.message };
   }
 };

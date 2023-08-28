@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import dbConnection from "./common/db-Connection";
+
 require("dotenv").config();
 
 //import rutera
@@ -13,6 +14,7 @@ import levelCefrEquivRouter from "./routing/level-cefr-equiv-routing";
 import levelDifficultyRouter from "./routing/level-difficulty-routing";
 import newWordRouter from "./routing/new-word-routing";
 import newsletterRouter from "./routing/newsletter-routing";
+import fileUploadRouter from "./common/file-upload";
 
 const app = express();
 app.use(cors());
@@ -29,6 +31,7 @@ app.use("/new-words", newWordRouter);
 app.use("/newsletter", newsletterRouter);
 
 app.use(express.static(path.join(__dirname, "public")));
+app.use(fileUploadRouter);
 
 app.listen(3000, () => {
   //izvrsava se kad se server pokrene
