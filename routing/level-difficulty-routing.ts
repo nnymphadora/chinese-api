@@ -1,14 +1,15 @@
 import levelDifficultyController from "../controllers/level-difficulty-controller";
 import express from "express";
+import authMiddleware from "../middlewares/auth-middleware";
 
 const levelDifficultyRouter = express.Router();
 
 levelDifficultyRouter
   .route("/")
-  .get(levelDifficultyController.getAllLevelDifficulties);
+  .get(authMiddleware, levelDifficultyController.getAllLevelDifficulties);
 
 levelDifficultyRouter
   .route("/:id")
-  .get(levelDifficultyController.getLevelDifficultyById);
+  .get(authMiddleware, levelDifficultyController.getLevelDifficultyById);
 
 export default levelDifficultyRouter;

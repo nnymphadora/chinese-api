@@ -9,6 +9,17 @@ const getAllUsernames = async () => {
   }
 };
 
+const getUserById = async (id: number) => {
+  try {
+    const result = await dbConnection.query("SELECT * FROM user WHERE id = ?", [
+      id,
+    ]);
+    return result;
+  } catch (e: any) {
+    return { success: false, msg: e.message };
+  }
+};
+
 const register = async (user: any) => {
   try {
     console.log(user);
@@ -38,4 +49,4 @@ const login = async (user: any) => {
   }
 };
 
-export default { register, login, getAllUsernames };
+export default { register, login, getAllUsernames, getUserById };

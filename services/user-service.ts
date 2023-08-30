@@ -11,6 +11,19 @@ const getAllUsernames = async () => {
   return result;
 };
 
+const getUserById = async (id: number) => {
+  const data = await userRepository.getUserById(id);
+
+  if (data && data.length > 0) {
+    return {
+      id: data[0].id,
+      username: data[0].username,
+      isAdmin: data[0].is_admin,
+      email: data[0].email,
+      avatarPath: data[0].avatar_path,
+    };
+  }
+};
 const register = async (user: any) => {
   user.hashedPassword = crypto
     .createHash("sha256")
@@ -21,8 +34,11 @@ const register = async (user: any) => {
   if (result.affectedRows > 0) {
     const token = jwt.sign(
       {
+        id: user.id,
         username: user.username,
         isAdmin: false,
+        email: user.email,
+        avatarPath: user.avatar_path,
       },
       secretKey
     );
@@ -39,12 +55,11 @@ const login = async (user: any) => {
     .update(user.password)
     .digest("hex");
   const result = await userRepository.login(user);
-  console.log(secretKey);
 
   if (result && result.length > 0) {
     const token = jwt.sign(
       {
-        username: user.username,
+        id: result[0].id,
         isAdmin: result[0].is_admin == 1,
       },
       secretKey
@@ -56,4 +71,4 @@ const login = async (user: any) => {
   }
 };
 
-export default { register, login, getAllUsernames };
+export default { register, login, getAllUsernames, getUserById };

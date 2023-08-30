@@ -1,16 +1,17 @@
 import express from "express";
 import levelController from "../controllers/level-controller";
+import authMiddleware from "../middlewares/auth-middleware";
 
 const levelRouter = express.Router();
 
 levelRouter
   .route("/")
-  .get(levelController.getAllLevels)
+  .get(authMiddleware, levelController.getAllLevels)
   .post(levelController.insertLevel);
 
 levelRouter
   .route("/:id")
-  .get(levelController.getLevelByID)
+  .get(authMiddleware, levelController.getLevelByID)
   .put(levelController.updateLevel);
 
 levelRouter.route("/:id/delete").put(levelController.softDeleteLevel);

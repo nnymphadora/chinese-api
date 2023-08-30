@@ -1,14 +1,15 @@
 import levelCefrEquivController from "../controllers/level-cefr-equiv-controller";
 import express from "express";
+import authMiddleware from "../middlewares/auth-middleware";
 
 const levelCefrEquivRouter = express.Router();
 
 levelCefrEquivRouter
   .route("/")
-  .get(levelCefrEquivController.getAllLevelCefrEquivs);
+  .get(authMiddleware, levelCefrEquivController.getAllLevelCefrEquivs);
 
 levelCefrEquivRouter
   .route("/:id")
-  .get(levelCefrEquivController.getLevelCefrEquivByID);
+  .get(authMiddleware, levelCefrEquivController.getLevelCefrEquivByID);
 
 export default levelCefrEquivRouter;

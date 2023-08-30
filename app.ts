@@ -30,7 +30,9 @@ app.use("/level-difficulty", levelDifficultyRouter);
 app.use("/new-words", newWordRouter);
 app.use("/newsletter", newsletterRouter);
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public/avatars")));
+app.use(express.static(path.join(__dirname, "public/uploaded-avatars")));
+
 app.use(fileUploadRouter);
 
 app.listen(3000, () => {
