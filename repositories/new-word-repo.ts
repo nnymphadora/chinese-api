@@ -62,6 +62,7 @@ const updateNewWord = async (id: number, newWord: any) => {
     const result = await dbConnection.query(
       "UPDATE new_word SET content = ?, meaning = ?, pinyin = ?, related_lesson_id = ?, ex_sent_1 = ?, ex_sent_1_mne = ?, ex_sent_2 = ? , ex_sent_2_mne = ? WHERE id = ?",
       [
+        newWord.content,
         newWord.meaning,
         newWord.pinyin,
         newWord.relatedLessonId,

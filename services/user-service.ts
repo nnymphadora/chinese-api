@@ -11,8 +11,8 @@ const getAllUsernames = async () => {
   return result;
 };
 
-const getUserById = async (id: number) => {
-  const data = await userRepository.getUserById(id);
+const getUserByUsername = async (username: string) => {
+  const data = await userRepository.getUserByUsername(username);
 
   if (data && data.length > 0) {
     return {
@@ -34,11 +34,8 @@ const register = async (user: any) => {
   if (result.affectedRows > 0) {
     const token = jwt.sign(
       {
-        id: user.id,
         username: user.username,
         isAdmin: false,
-        email: user.email,
-        avatarPath: user.avatar_path,
       },
       secretKey
     );
@@ -59,7 +56,7 @@ const login = async (user: any) => {
   if (result && result.length > 0) {
     const token = jwt.sign(
       {
-        id: result[0].id,
+        username: result[0].username,
         isAdmin: result[0].is_admin == 1,
       },
       secretKey
@@ -71,4 +68,4 @@ const login = async (user: any) => {
   }
 };
 
-export default { register, login, getAllUsernames, getUserById };
+export default { register, login, getAllUsernames, getUserByUsername };

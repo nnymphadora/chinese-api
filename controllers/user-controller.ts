@@ -6,8 +6,8 @@ const getAllUsernames = async (req: Request, res: Response) => {
   res.send(result);
 };
 
-const getUserById = async (req: Request, res: Response) => {
-  const data = await userService.getUserById(parseInt(req.params.id));
+const getUserByUsername = async (req: Request, res: Response) => {
+  const data = await userService.getUserByUsername(req.params.username);
   res.send(data);
 };
 
@@ -21,4 +21,4 @@ const login = async (req: Request, res: Response) => {
   res.send(result);
 };
 
-export default { register, login, getAllUsernames, getUserById };
+export default { register, login, getAllUsernames, getUserByUsername };

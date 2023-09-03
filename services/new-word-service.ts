@@ -72,6 +72,8 @@ const insertNewWords = async (newWords: any[]) => {
 
 const updateNewWord = async (id: number, lesson: any) => {
   const result = await newWordRepo.updateNewWord(id, lesson);
+  console.log(result);
+
   return result;
 };
 
