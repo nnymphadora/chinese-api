@@ -1,4 +1,5 @@
 import newWordRepo from "../repositories/new-word-repo";
+import newsletterRepo from "../repositories/newsletter-repo";
 
 const getNewWordsByLesson = async (lessonId: number) => {
   const data = await newWordRepo.getNewWordsByLesson(lessonId);
@@ -61,18 +62,19 @@ const getNewWordById = async (id: number) => {
   }
 };
 
+const insertNewWord = async (newWord: any) => {
+  const result = await newWordRepo.insertNewWord(newWord);
+};
+
 const insertNewWords = async (newWords: any[]) => {
   const promises = newWords.map(async (newWord) => {
     return newWordRepo.insertNewWord(newWord);
   });
-
-  const results = await Promise.all(promises);
-  return results;
+  return promises;
 };
 
-const updateNewWord = async (id: number, lesson: any) => {
-  const result = await newWordRepo.updateNewWord(id, lesson);
-  console.log(result);
+const updateNewWord = async (newWord: any) => {
+  const result = await newWordRepo.updateNewWord(newWord.id);
 
   return result;
 };
@@ -82,11 +84,58 @@ const deleteNewWord = async (id: number) => {
   return result;
 };
 
+const updateNewWordsForEditedLesson = async (
+  newWords: any,
+  lessonId: number
+): Promise<any[]> => {
+  const results: any[] = [];
+
+  // Handle deletion
+
+  const existingNewWordsForLessonInDb = await newWordRepo.getNewWordsByLesson(
+    lessonId
+  );
+
+  await Promise.all(
+    existingNewWordsForLessonInDb.map(async (existingNewWordInDb: any) => {
+      if (
+        !newWords.some((newWord: any) => newWord.id === existingNewWordInDb.id)
+      ) {
+        const deletedNewWord = await newWordRepo.deleteNewWord(
+          existingNewWordInDb.id
+        );
+        results.push(deletedNewWord);
+        console.log("izbrisana", existingNewWordInDb);
+      }
+    })
+  );
+
+  await Promise.all(
+    newWords.map(async (newWord: any) => {
+      if (!newWord.id) {
+        const insertedNewWord = await newWordRepo.insertNewWord(newWord);
+        results.push(insertedNewWord);
+        console.log("dodata", newWord);
+      } else {
+        const existingNewWord = await newWordRepo.getNewWordById(newWord.id);
+        if (existingNewWord) {
+          const updatedNewWord = await newWordRepo.updateNewWord(newWord);
+          results.push(updatedNewWord);
+          console.log("editovana", newWord);
+        }
+      }
+    })
+  );
+
+  return results;
+};
 export default {
   getNewWordsByLesson,
   getNewWordsByLevel,
   getNewWordById,
+  insertNewWord,
   insertNewWords,
   updateNewWord,
   deleteNewWord,
+  updateNewWordsForEditedLesson,
 };

@@ -51,13 +51,15 @@ const insertNewWord = async (newWord: any) => {
         newWord.exSent2Mne,
       ]
     );
+    console.log(newWord);
+
     return { success: true, result };
   } catch (e: any) {
     return { success: false, msg: e.message };
   }
 };
 
-const updateNewWord = async (id: number, newWord: any) => {
+const updateNewWord = async (newWord: any) => {
   try {
     const result = await dbConnection.query(
       "UPDATE new_word SET content = ?, meaning = ?, pinyin = ?, related_lesson_id = ?, ex_sent_1 = ?, ex_sent_1_mne = ?, ex_sent_2 = ? , ex_sent_2_mne = ? WHERE id = ?",
@@ -71,7 +73,7 @@ const updateNewWord = async (id: number, newWord: any) => {
         newWord.exSent2,
         newWord.exSent2Mne,
 
-        id,
+        newWord.id,
       ]
     );
     return { success: true, result };

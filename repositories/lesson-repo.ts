@@ -35,6 +35,9 @@ const insertLesson = async (lesson: any) => {
         lesson.lessonOrderInLevel,
       ]
     );
+
+    const insertId = result.insertId;
+
     return { success: true, result };
   } catch (e: any) {
     return { success: false, msg: e.message };

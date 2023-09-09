@@ -31,7 +31,6 @@ const toggleActiveLesson = async (req: Request, res: Response) => {
   const id = req.params.id;
   const data = await lessonService.toggleActiveLesson(parseInt(id), req.body);
   res.send(data);
-  console.log(req.body);
 };
 
 const softDeleteLesson = async (req: Request, res: Response) => {

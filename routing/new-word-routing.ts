@@ -7,6 +7,10 @@ const newWordRouter = express.Router();
 newWordRouter.route("/").post(newWordController.insertNewWords);
 
 newWordRouter
+  .route("/edit")
+  .post(newWordController.updateNewWordsForEditedLesson);
+
+newWordRouter
   .route("/:id")
   .put(newWordController.updateNewWord)
   .delete(newWordController.deleteNewWord)

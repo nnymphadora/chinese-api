@@ -4,14 +4,12 @@ import { Request, Response } from "express";
 const getAllLevels = async (req: Request, res: Response) => {
   const alldata = await levelService.getAllLevels();
   const data = alldata.filter((level: any) => level.isRemoved !== 1);
-
   res.send(data);
 };
 
 const getLevelByID = async (req: Request, res: Response) => {
   const id = req.params.id;
   const data = await levelService.getLevelByID(parseInt(id));
-
   res.send(data);
 };
 
@@ -30,7 +28,6 @@ const toggleActiveLevel = async (req: Request, res: Response) => {
   const id = req.params.id;
   const data = await levelService.toggleActiveLevel(parseInt(id), req.body);
   res.send(data);
-  console.log(req.body);
 };
 
 const softDeleteLevel = async (req: Request, res: Response) => {

@@ -1,3 +1,4 @@
+import { Any } from "typeorm";
 import newWordService from "../services/new-word-service";
 import { Request, Response } from "express";
 
@@ -20,21 +21,28 @@ const getNewWordById = async (req: Request, res: Response) => {
 };
 
 const insertNewWords = async (req: Request, res: Response) => {
-  console.log(req.body);
-
   const data = await newWordService.insertNewWords(req.body);
   res.send(data);
 };
 
 const updateNewWord = async (req: Request, res: Response) => {
-  const id = req.params.id;
-  const data = await newWordService.updateNewWord(parseInt(id), req.body);
+  const data = await newWordService.updateNewWord(req.body);
   res.send(data);
 };
 
 const deleteNewWord = async (req: Request, res: Response) => {
   const id = req.params.id;
   const data = await newWordService.deleteNewWord(parseInt(id));
+  res.send(data);
+};
+
+const updateNewWordsForEditedLesson = async (req: Request, res: Response) => {
+  const newWords = req.body.newWords;
+  const lessonId = req.body.lessonId;
+  const data = await newWordService.updateNewWordsForEditedLesson(
+    newWords,
+    lessonId
+  );
   res.send(data);
 };
 
@@ -45,4 +53,5 @@ export default {
   insertNewWords,
   deleteNewWord,
   getNewWordsByLevel,
+  updateNewWordsForEditedLesson,
 };
