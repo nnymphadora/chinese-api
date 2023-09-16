@@ -29,7 +29,7 @@ const insertLevel = async (level: any) => {
       `INSERT INTO level(
                     name, difficulty, description, cefr_equiv) VALUES 
                     (?, ?, ?, ?)`,
-      [level.name, level.difficulty.id, level.description, level.cefrEquiv.id]
+      [level.name, level.difficulty, level.description, level.cefrEquiv]
     );
     return { success: true, result };
   } catch (e: any) {
@@ -42,13 +42,7 @@ const updateLevel = async (id: number, level: any) => {
   try {
     const result = await dbConnection.query(
       "UPDATE level SET name  = ?, difficulty = ?, description = ?, cefr_equiv = ?  WHERE id = ?",
-      [
-        level.name,
-        level.difficulty.id,
-        level.description,
-        level.cefrEquiv.id,
-        id,
-      ]
+      [level.name, level.difficulty, level.description, level.cefrEquiv, id]
     );
     return { success: true, result };
   } catch (e: any) {
