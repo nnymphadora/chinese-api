@@ -24,6 +24,21 @@ const getUserByUsername = async (username: string) => {
     };
   }
 };
+
+const getUserById = async (id: number) => {
+  const data = await userRepository.getUserById(id);
+
+  if (data && data.length > 0) {
+    return {
+      id: data[0].id,
+      username: data[0].username,
+      isAdmin: data[0].is_admin,
+      email: data[0].email,
+      avatarPath: data[0].avatar_path,
+    };
+  }
+};
+
 const register = async (user: any) => {
   user.hashedPassword = crypto
     .createHash("sha256")
@@ -68,4 +83,30 @@ const login = async (user: any) => {
   }
 };
 
-export default { register, login, getAllUsernames, getUserByUsername };
+const updateUserInfo = async (id: number, user: any) => {
+  const result = await userRepository.updateUserInfo(id, user);
+  console.log(result);
+
+  if (result.affectedRows > 0) {
+    const token = jwt.sign(
+      {
+        username: user.username,
+        isAdmin: user.is_admin == 1,
+      },
+      secretKey
+    );
+
+    return { success: true, token };
+  } else {
+    return { success: false, result };
+  }
+};
+
+export default {
+  register,
+  login,
+  getAllUsernames,
+  getUserByUsername,
+  updateUserInfo,
+  getUserById,
+};

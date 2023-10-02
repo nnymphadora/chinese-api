@@ -21,6 +21,17 @@ const getUserByUsername = async (username: string) => {
   }
 };
 
+const getUserById = async (id: number) => {
+  try {
+    const result = await dbConnection.query("SELECT * FROM user WHERE id = ?", [
+      id,
+    ]);
+    return result;
+  } catch (e: any) {
+    return { success: false, msg: e.message };
+  }
+};
+
 const register = async (user: any) => {
   try {
     console.log(user);
@@ -50,4 +61,23 @@ const login = async (user: any) => {
   }
 };
 
-export default { register, login, getAllUsernames, getUserByUsername };
+const updateUserInfo = async (id: number, user: any) => {
+  try {
+    const result = await dbConnection.query(
+      "UPDATE user SET username = ?, email = ?, avatar_path = ? WHERE id = ?",
+      [user.username, user.email, user.avatarPath, id]
+    );
+    return result;
+  } catch (e: any) {
+    return { success: false, msg: e.message };
+  }
+};
+
+export default {
+  register,
+  login,
+  getAllUsernames,
+  getUserByUsername,
+  updateUserInfo,
+  getUserById,
+};

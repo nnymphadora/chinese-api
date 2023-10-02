@@ -50,7 +50,6 @@ const updateLevel = async (id: number, level: any) => {
 
 const toggleActiveLevel = async (id: number, toggleActive: any) => {
   const result = await levelRepo.toggleActiveLevel(id, toggleActive);
-  console.log(id, toggleActive);
 
   return result;
 };
