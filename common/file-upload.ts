@@ -1,5 +1,5 @@
-import multer, { StorageEngine } from "multer";
-import express, { response } from "express";
+import multer from "multer";
+import express from "express";
 import { Request, Response } from "express";
 import path from "path";
 

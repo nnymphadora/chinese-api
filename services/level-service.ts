@@ -38,13 +38,13 @@ const getLevelByID = async (id: number) => {
 
 const insertLevel = async (level: any) => {
   const result = await levelRepo.insertLevel(level);
-  console.log(level);
 
   return result;
 };
 
 const updateLevel = async (id: number, level: any) => {
   const result = await levelRepo.updateLevel(id, level);
+
   return result;
 };
 

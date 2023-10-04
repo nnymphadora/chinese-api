@@ -51,7 +51,6 @@ const insertNewWord = async (newWord: any) => {
         newWord.exSent2Mne,
       ]
     );
-    console.log(newWord);
 
     return { success: true, result };
   } catch (e: any) {

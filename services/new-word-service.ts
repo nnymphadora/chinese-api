@@ -105,7 +105,6 @@ const updateNewWordsForEditedLesson = async (
           existingNewWordInDb.id
         );
         results.push(deletedNewWord);
-        console.log("izbrisana", existingNewWordInDb);
       }
     })
   );
@@ -115,13 +114,11 @@ const updateNewWordsForEditedLesson = async (
       if (!newWord.id) {
         const insertedNewWord = await newWordRepo.insertNewWord(newWord);
         results.push(insertedNewWord);
-        console.log("dodata", newWord);
       } else {
         const existingNewWord = await newWordRepo.getNewWordById(newWord.id);
         if (existingNewWord) {
           const updatedNewWord = await newWordRepo.updateNewWord(newWord);
           results.push(updatedNewWord);
-          console.log("editovana", newWord);
         }
       }
     })

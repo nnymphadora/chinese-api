@@ -56,9 +56,8 @@ const register = async (user: any) => {
     );
 
     return { success: true, token };
-  } else {
-    return { success: false, result };
   }
+  return { success: false, result };
 };
 
 const login = async (user: any) => {
@@ -66,7 +65,7 @@ const login = async (user: any) => {
     .createHash("sha256")
     .update(user.password)
     .digest("hex");
-  const result = await userRepository.login(user);
+  const result = await userRepository.login(user.username, user.hashedPassword);
 
   if (result && result.length > 0) {
     const token = jwt.sign(
@@ -78,14 +77,12 @@ const login = async (user: any) => {
     );
 
     return { success: true, token };
-  } else {
-    return { success: false, result };
   }
+  return { success: false, result };
 };
 
-const updateUserInfo = async (id: number, user: any) => {
-  const result = await userRepository.updateUserInfo(id, user);
-  console.log(result);
+const updateUserInfo = async (user: any) => {
+  const result = await userRepository.updateUserInfo(user.id, user);
 
   if (result.affectedRows > 0) {
     const token = jwt.sign(
@@ -97,9 +94,28 @@ const updateUserInfo = async (id: number, user: any) => {
     );
 
     return { success: true, token };
-  } else {
-    return { success: false, result };
   }
+  return { success: false, result };
+};
+
+const updateUserPassword = async (user: any) => {
+  user.hashedPassword = crypto
+    .createHash("sha256")
+    .update(user.password)
+    .digest("hex");
+  const result = await userRepository.updateUserPassword(user);
+  if (result.affectedRows > 0) return { success: true, result };
+  return { success: false, result };
+};
+
+const confirmPassword = async (user: any) => {
+  user.hashedPassword = crypto
+    .createHash("sha256")
+    .update(user.password)
+    .digest("hex");
+  const result = await userRepository.login(user.username, user.hashedPassword);
+  if (result && result.length > 0) return { success: true, result };
+  return { success: false, result };
 };
 
 export default {
@@ -109,4 +125,6 @@ export default {
   getUserByUsername,
   updateUserInfo,
   getUserById,
+  updateUserPassword,
+  confirmPassword,
 };

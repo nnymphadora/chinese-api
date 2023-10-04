@@ -27,8 +27,17 @@ const login = async (req: Request, res: Response) => {
 };
 
 const updateUserInfo = async (req: Request, res: Response) => {
-  const id = req.params.id;
-  const data = await userService.updateUserInfo(parseInt(id), req.body);
+  const data = await userService.updateUserInfo(req.body);
+  res.send(data);
+};
+
+const updateUserPassword = async (req: Request, res: Response) => {
+  const data = await userService.updateUserPassword(req.body);
+  res.send(data);
+};
+
+const confirmPassword = async (req: Request, res: Response) => {
+  const data = await userService.confirmPassword(req.body);
   res.send(data);
 };
 
@@ -39,4 +48,6 @@ export default {
   getUserByUsername,
   updateUserInfo,
   getUserById,
+  confirmPassword,
+  updateUserPassword,
 };

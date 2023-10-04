@@ -34,8 +34,6 @@ const getUserById = async (id: number) => {
 
 const register = async (user: any) => {
   try {
-    console.log(user);
-
     const result = await dbConnection.query(
       `INSERT INTO user(username, email, hashed_password, avatar_path, is_admin) 
                                                 VALUES (?, ?, ?, ?, 0)`,
@@ -43,17 +41,15 @@ const register = async (user: any) => {
     );
     return result;
   } catch (e: any) {
-    console.log(e);
-
     return { success: false, msg: e.message };
   }
 };
 
-const login = async (user: any) => {
+const login = async (username: string, hashedPassword: string) => {
   try {
     const result = await dbConnection.query(
       `SELECT * FROM user WHERE username = ? AND hashed_password = ?`,
-      [user.username, user.hashedPassword]
+      [username, hashedPassword]
     );
     return result;
   } catch (e: any) {
@@ -73,6 +69,18 @@ const updateUserInfo = async (id: number, user: any) => {
   }
 };
 
+const updateUserPassword = async (user: any) => {
+  try {
+    const result = await dbConnection.query(
+      "UPDATE user SET hashed_password = ? WHERE id = ?",
+      [user.hashedPassword, user.id]
+    );
+    return result;
+  } catch (e: any) {
+    return { success: false, msg: e.message };
+  }
+};
+
 export default {
   register,
   login,
@@ -80,4 +88,5 @@ export default {
   getUserByUsername,
   updateUserInfo,
   getUserById,
+  updateUserPassword,
 };
