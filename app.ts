@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(userRouter);
 app.use("/levels", levelRouter);
 app.use("/lessons", lessonRouter);
-app.use("/ls-values", lessonStatusValueRouter);
+
 app.use("/level-cefr-equivs", levelCefrEquivRouter);
 app.use("/level-difficulty", levelDifficultyRouter);
 app.use("/new-words", newWordRouter);
