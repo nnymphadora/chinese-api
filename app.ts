@@ -9,7 +9,6 @@ require("dotenv").config();
 import userRouter from "./routing/user-routing";
 import levelRouter from "./routing/level-routing";
 import lessonRouter from "./routing/lesson-routing";
-import lessonStatusValueRouter from "./routing/lesson-status-value-routing";
 import levelCefrEquivRouter from "./routing/level-cefr-equiv-routing";
 import levelDifficultyRouter from "./routing/level-difficulty-routing";
 import newWordRouter from "./routing/new-word-routing";

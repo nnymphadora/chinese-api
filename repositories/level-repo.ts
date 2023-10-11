@@ -31,6 +31,7 @@ const insertLevel = async (level: any) => {
                     (?, ?, ?, ?)`,
       [level.name, level.difficulty, level.description, level.cefrEquiv]
     );
+
     return { success: true, result };
   } catch (e: any) {
     return { success: false, msg: e.message };

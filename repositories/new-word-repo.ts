@@ -75,6 +75,7 @@ const updateNewWord = async (newWord: any) => {
         newWord.id,
       ]
     );
+
     return { success: true, result };
   } catch (e: any) {
     return {
@@ -90,7 +91,7 @@ const deleteNewWord = async (id: number) => {
       "DELETE FROM new_word  WHERE id = ?",
       [id]
     );
-    return { succes: true, result };
+    return { success: true, result };
   } catch (e: any) {
     return { success: false, msg: e.message };
   }

@@ -70,11 +70,14 @@ const insertNewWords = async (newWords: any[]) => {
   const promises = newWords.map(async (newWord) => {
     return newWordRepo.insertNewWord(newWord);
   });
-  return promises;
+  const results = await Promise.all(promises);
+  console.log(results);
+
+  return results;
 };
 
 const updateNewWord = async (newWord: any) => {
-  const result = await newWordRepo.updateNewWord(newWord.id);
+  const result = await newWordRepo.updateNewWord(newWord);
 
   return result;
 };
